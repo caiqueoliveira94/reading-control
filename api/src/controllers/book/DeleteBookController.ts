@@ -4,8 +4,9 @@ import { DeleteBookService } from "../../services/book/DeleteBookService";
 class DeleteBookController {
     async handle(req: Request, res: Response) {
         const { id } = req.query;
+        const user_id = req.user_id;
         const deleteBookService = new DeleteBookService();
-        await deleteBookService.execute({ id: id! as string });
+        await deleteBookService.execute({ id: id! as string, user_id: user_id! as string });
         return res.json({ message: "Book deleted successfully" });
     }
 }

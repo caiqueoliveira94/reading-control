@@ -4,13 +4,15 @@ import { ReadingStatus } from "../../generated/prisma";
 interface FinishBookProps {
     book_id: string;
     status: ReadingStatus;
+    user_id: string;
 }
 
 class FinishBookService {
-    async execute({ book_id, status }: FinishBookProps) {
+    async execute({ book_id, status, user_id }: FinishBookProps) {
         const book = await prismaClient.book.update({
             where: {
-                id: book_id
+                id: book_id,
+                user_id
             },
             data: {
                 status

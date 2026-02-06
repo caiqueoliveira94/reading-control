@@ -3,9 +3,9 @@ import { ListBooksService } from "../../services/book/ListBooksService";
 
 class ListBooksController {
     async handle(req: Request, res: Response) {
-        const { user_id } = req;
+        const user_id = req.user_id;
         const listBooksService = new ListBooksService();
-        const books = await listBooksService.execute({ user_id: user_id! });
+        const books = await listBooksService.execute({ user_id });
         return res.json(books);
     }
 }

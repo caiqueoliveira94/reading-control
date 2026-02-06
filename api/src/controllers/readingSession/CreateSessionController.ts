@@ -3,7 +3,7 @@ import { CreateSessionService } from "../../services/readingSession/CreateSessio
 
 class CreateSessionController {
     async handle(req: Request, res: Response) {
-        const { user_id } = req;
+        const user_id = req.user_id;
         const { book_id, current_page } = req.body;
         const createSessionService = new CreateSessionService();
         const session = await createSessionService.execute({

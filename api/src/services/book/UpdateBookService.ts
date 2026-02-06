@@ -7,13 +7,15 @@ interface UpdateBookProps {
     genre: string;
     pages: number;
     cover_url: string;
+    user_id: string;
 }
 
 class UpdateBookService {
-    async execute({ id, title, author, genre, pages, cover_url }: UpdateBookProps) {
+    async execute({ id, title, author, genre, pages, cover_url, user_id }: UpdateBookProps) {
         const book = await prismaClient.book.update({
             where: {
                 id,
+                user_id
             },
             data: {
                 title,
