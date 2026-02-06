@@ -6,11 +6,16 @@ import { AuthUserController } from "./controllers/user/AuthUserController";
 import { MeUserController } from "./controllers/user/MeUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { CreateBookController } from "./controllers/book/CreateBookController";
-import { createBookSchema } from "./schemas/bookSchema";
+import { createBookSchema, updateBookSchema } from "./schemas/bookSchema";
 import { createSessionSchema } from "./schemas/readingSessionSchema";
 import { CreateSessionController } from "./controllers/readingSession/CreateSessionController";
 import { ListBooksController } from "./controllers/book/ListBooksController";
 import { GetBookController } from "./controllers/book/GetBookController";
+import { UpdateBookController } from "./controllers/book/UpdateBookController";
+import { DeleteBookController } from "./controllers/book/DeleteBookController";
+import { FinishSessionController } from "./controllers/readingSession/FinishSessionController";
+import { FinishBookController } from "./controllers/book/FinishBookController";
+
 
 const router = Router();
 
@@ -51,12 +56,36 @@ router.get(
     new GetBookController().handle
 );
 
+router.put(
+    "/book",
+    isAuthenticated,
+    validateSchema(updateBookSchema),
+    new UpdateBookController().handle
+);
+
+router.delete(
+    "/book",
+    isAuthenticated,
+    new DeleteBookController().handle
+);
+
+router.patch(
+    "/book/finish",
+    isAuthenticated,
+    new FinishBookController().handle
+);
 
 router.post(
     "/reading-session",
     isAuthenticated,
     validateSchema(createSessionSchema),
     new CreateSessionController().handle
+);
+
+router.patch(
+    "/reading-session/finish-session",
+    isAuthenticated,
+    new FinishSessionController().handle
 );
 
 export { router };

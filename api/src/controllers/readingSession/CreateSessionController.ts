@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { CreateSessionService } from "../../services/readingSession/CreateSessionService";
-import { ReadingStatus } from "../../generated/prisma";
 
 class CreateSessionController {
     async handle(req: Request, res: Response) {
@@ -11,8 +10,6 @@ class CreateSessionController {
             user_id,
             book_id,
             start_time: new Date(),
-            end_time: new Date(),
-            status: ReadingStatus.READING,
             current_page
         });
         return res.json(session);
