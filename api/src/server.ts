@@ -1,3 +1,4 @@
+process.env.TZ = "America/Sao_Paulo";
 import cors from "cors";
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";

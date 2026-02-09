@@ -130,11 +130,45 @@ Todas as rotas (exceto `/register` e `/login`) exigem um header de autorização
   - **Query Params:** `id=<book_id>`
   - **Retorno:** Objeto detalhado do livro.
 
+- **PUT** `/book`
+  - **Descrição:** Atualiza as informações de um livro.
+  - **Body:** `{ "id": "...", "title": "?", "author": "?", ... }`
+  - **Retorno:** Objeto do livro atualizado.
+
+- **DELETE** `/book`
+  - **Descrição:** Remove um livro do sistema.
+  - **Query Params:** `id=<book_id>`
+  - **Retorno:** Confirmação da exclusão.
+
+- **PATCH** `/book/finish`
+  - **Descrição:** Marca um livro como finalizado.
+  - **Body:** `{ "id": "..." }`
+  - **Retorno:** Objeto do livro atualizado com status finalizado.
+
 ### Sessões de Leitura
 - **POST** `/reading-session`
-  - **Descrição:** Inicia ou registra uma sessão de leitura.
+  - **Descrição:** Inicia ou registra uma nova sessão de leitura.
   - **Body:** `{ "book_id": "...", "current_page": 10 }`
   - **Retorno:** Objeto da sessão de leitura criada.
+
+- **GET** `/reading-session`
+  - **Descrição:** Lista todas as sessões de leitura de um livro ou usuário.
+  - **Retorno:** Array de sessões.
+
+- **GET** `/reading-session/details`
+  - **Descrição:** Obtém detalhes de uma sessão de leitura específica.
+  - **Query Params:** `id=<session_id>`
+  - **Retorno:** Objeto da sessão.
+
+- **PATCH** `/reading-session/finish`
+  - **Descrição:** Finaliza uma sessão de leitura aberta.
+  - **Body:** `{ "id": "..." }`
+  - **Retorno:** Sessão finalizada.
+
+- **PUT** `/reading-session/update`
+  - **Descrição:** Atualiza dados de uma sessão (ex: página atual).
+  - **Body:** `{ "id": "...", ... }`
+  - **Retorno:** Sessão atualizada.
 
 
 ---

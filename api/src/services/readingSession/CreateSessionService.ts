@@ -6,18 +6,18 @@ interface CreateSessionProps {
     book_id: string;
     start_time: Date;
     status?: ReadingStatus;
-    current_page?: number;
+    start_page?: number;
 }
 
 class CreateSessionService {
-    async execute({ user_id, book_id, start_time, status, current_page }: CreateSessionProps) {
+    async execute({ user_id, book_id, start_time, status, start_page }: CreateSessionProps) {
         const session = await prismaClient.readingSession.create({
             data: {
                 user_id,
                 book_id,
                 start_time,
+                start_page: start_page || 0,
                 ...(status && { status }),
-                ...(current_page && { current_page }),
             },
         });
 

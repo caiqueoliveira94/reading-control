@@ -18,6 +18,9 @@ import { FinishSessionController } from "./controllers/readingSession/FinishSess
 import { ListSessionController } from "./controllers/readingSession/ListSessionController";
 import { GetSessionController } from "./controllers/readingSession/GetSessionController";
 import { UpdateSessionController } from "./controllers/readingSession/UpdateSessionController";
+import { GetOverviewStatsController } from "./controllers/personalStats/GetOverviewStatsController";
+import { GetPeriodStatsController } from "./controllers/personalStats/GetPeriodStatsController";
+import { getPeriodStatsSchema } from "./schemas/statsSchema";
 
 const router = Router();
 
@@ -106,6 +109,19 @@ router.put(
     "/reading-session/update",
     isAuthenticated,
     new UpdateSessionController().handle
+);
+
+router.get(
+    "/personal-stats/overview",
+    isAuthenticated,
+    new GetOverviewStatsController().handle
+);
+
+router.get(
+    "/personal-stats/period",
+    isAuthenticated,
+    validateSchema(getPeriodStatsSchema),
+    new GetPeriodStatsController().handle
 );
 
 export { router };

@@ -32,9 +32,11 @@ model Book {
   google_book_id String        @unique
   status         ReadingStatus @default(PENDING)
 
-  pages           Int
-  created_at      DateTime         @default(now())
-  updated_at      DateTime         @updatedAt
+  pages       Int
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  finished_at DateTime?
+
   readingSessions ReadingSession[]
 
   user User @relation(fields: [user_id], references: [id])
@@ -49,14 +51,16 @@ enum ReadingStatus {
 }
 
 model ReadingSession {
-  id           String    @id @default(uuid())
-  user_id      String
-  book_id      String
-  start_time   DateTime
-  end_time     DateTime?
-  current_page Int       @default(0)
-  created_at   DateTime  @default(now())
-  updated_at   DateTime  @updatedAt
+  id         String    @id @default(uuid())
+  user_id    String
+  book_id    String
+  start_time DateTime
+  end_time   DateTime?
+  start_page Int
+  end_page   Int?
+  pages_read Int?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 
   user User @relation(fields: [user_id], references: [id])
   book Book @relation(fields: [book_id], references: [id])
