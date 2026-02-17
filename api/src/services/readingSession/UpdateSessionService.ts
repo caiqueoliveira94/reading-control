@@ -3,18 +3,18 @@ import prismaClient from "../../prisma";
 interface UpdateSessionProps {
     id: string;
     user_id: string;
-    current_page: number;
+    end_page: number;
 }
 
 class UpdateSessionService {
-    async execute({ id, user_id, current_page }: UpdateSessionProps) {
+    async execute({ id, user_id, end_page }: UpdateSessionProps) {
         const session = await prismaClient.readingSession.update({
             where: {
                 id,
                 user_id
             },
             data: {
-                current_page
+                end_page
             }
         });
         return session;
